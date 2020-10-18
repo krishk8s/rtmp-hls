@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-relay
+  namespace: rmtp
+spec:
+  type: NodePort
+  ports:
+  - name: rtmp
+    port: 1935
+    targetPort: 1935
+    nodePort: 30262
+  - name: http
+    port: 8080
+    targetPort: 8080
+    nodePort: 30081
+  selector:
+    k8s-app: rmtp-relay
+
