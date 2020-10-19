@@ -4,10 +4,11 @@ metadata:
   name: hls-data
   namespace: rmtp
 spec:
-  storageClassName: local
+  storageClassName: "nfs-medium"
   capacity:
-    storage: 30Gi
+    storage: 950Gi
   accessModes:
     - ReadWriteMany
-  hostPath:
-    path: "/mnt/nas-data/hls-data"
+  nfs:
+    path: /hls_data
+    server: 10.23.11.250

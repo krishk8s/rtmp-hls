@@ -18,6 +18,11 @@ spec:
       containers:
       - name: nginx-rmtp-relay
         image: alqutami/rtmp-hls
+        resources:
+          limits:
+            cpu: "200m"
+          requests:
+            cpu: "100m"
         ports:
         - containerPort: 1935
         - containerPort: 8080

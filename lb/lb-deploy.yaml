@@ -18,6 +18,11 @@ spec:
       containers:
       - name: nginx-rmtp-lb
         image: nginx
+        resources:
+          limits:
+            cpu: "250m"
+          requests:
+            cpu: "100m"
         ports:
         - containerPort: 80
         volumeMounts:
