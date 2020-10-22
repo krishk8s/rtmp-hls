@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rmtp-client-lb
+  namespace: rmtp
+spec:
+  type: NodePort
+  ports:
+  - name: rtmp
+    port: 1935
+    targetPort: 1935
+    nodePort: 30264
+  - name: http
+    port: 8080
+    targetPort: 8080
+    nodePort: 30084
+  selector:
+    k8s-app: rmtp-client-lb

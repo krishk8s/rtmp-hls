@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: rmtp-client-lb
+  name: nginx-rmtp-client-lb
+  namespace: rmtp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: rmtp-clint-lb
+  template:
+    metadata:
+      labels:
+        k8s-app: rmtp-client-lb
+    spec:
+      containers:
+      - name: nginx-rmtp-client-lb
+        image: nginx
+        resources:
+          limits:
+            cpu: "250m"
+          requests:
+            cpu: "100m"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+          name: client-lb-config
+      volumes:
+      - name: client-lb-config
+        configMap:
+          name: clientt-lb-config
