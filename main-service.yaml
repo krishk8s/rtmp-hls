@@ -6,14 +6,13 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: rtmp        
+  - name: rtmp
     port: 1935
     targetPort: 1935
-    nodePort: 30263
+    nodePort: 30260
   - name: http
     port: 8080
     targetPort: 8080
     nodePort: 30080
   selector:
     k8s-app: rmtp-hls
-

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: rmtp-hls
+  name: nginx-rmtp-hls
+  namespace: rmtp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      k8s-app: rmtp-hls
+  template:
+    metadata:
+      labels:
+        k8s-app: rmtp-hls
+    spec:
+      containers:
+      - name: nginx-rmtp-hls
+        image: alqutami/rtmp-hls
+        resources:
+          limits:
+            cpu: "200m"
+          requests:
+            cpu: "100m"
+        ports:
+        - containerPort: 1935
+        - containerPort: 8080
+        volumeMounts:
+        - mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+          name: nginx-conf-main
+        - mountPath: /mnt
+          name: hls-data
+      volumes:
+      - name: nginx-conf-main
+        configMap:
+          name: nginx-conf-main
+      - name: hls-data
+        persistentVolumeClaim:
+          claimName: hls-data-pvc

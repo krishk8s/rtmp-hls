@@ -6,9 +6,10 @@ metadata:
 spec:
   storageClassName: "nfs-medium"
   capacity:
-    storage: 950Gi
+    storage: 990Gi
   accessModes:
     - ReadWriteMany
   nfs:
-    path: /hls_data
-    server: 10.23.11.250
+    path: /hlsdata
+    server: 10.210.28.130
+                               

@@ -1,0 +1,9 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: stream-ingress
+  namespace : rmtp
+spec:
+  backend:
+    serviceName: nginx-relay
+    servicePort: 8080
